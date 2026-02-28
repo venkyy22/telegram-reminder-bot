@@ -36,8 +36,8 @@ async def remind(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"I will remind you in {minutes} minute(s)."
         )
 
-    except:
-        await update.message.reply_text("Usage: /remind <minutes> <message>")
+    except Exception as e:
+        await update.message.reply_text(f"Error: {e}")
 
 async def send_voice_reminder(context: ContextTypes.DEFAULT_TYPE):
     job_data = context.job.data
