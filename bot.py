@@ -51,6 +51,8 @@ async def send_voice_reminder(context: ContextTypes.DEFAULT_TYPE):
     with open(filename, "rb") as audio:
         await context.bot.send_voice(chat_id=chat_id, voice=InputFile(audio))
 
+    await context.bot.send_audio(chat_id=chat_id, audio=open("notify.mp3", "rb"))
+
     os.remove(filename)
 
 def main():
