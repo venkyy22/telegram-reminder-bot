@@ -1,3 +1,4 @@
+print("🔥 NEW CODE VERSION 1.1 LOADED 🔥")
 from telegram import Update, InputFile
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from gtts import gTTS
