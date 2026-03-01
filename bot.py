@@ -1,11 +1,11 @@
-print("🔥 NEW CODE VERSION 1.1 LOADED 🔥")
+print("🔥 NEW CODE VERSION 1.2 LOADED 🔥")
 
 from telegram import Update, InputFile
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from gtts import gTTS
 import os
 
-TOKEN = "8735791546:AAF-GZ-vaFIIUVfp2OwbuQLyWoJA0ALBJYg"
+TOKEN = "PASTE_YOUR_REAL_BOT_TOKEN_HERE"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -23,11 +23,11 @@ async def remind(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("Give me something to remind you about.")
             return
 
-        context.application.job_queue.run_once(
+        context.job_queue.run_once(
             send_voice_reminder,
             when=minutes * 60,
             data={
-                "chat_id": update.message.chat_id,
+                "chat_id": update.effective_chat.id,
                 "text": message
             }
         )
@@ -45,14 +45,13 @@ async def send_voice_reminder(context: ContextTypes.DEFAULT_TYPE):
     chat_id = job_data["chat_id"]
     text = job_data["text"]
 
+    filename = f"reminder_{chat_id}.mp3"
+
     tts = gTTS(text=f"Reminder. {text}", lang="en")
-    filename = "reminder.mp3"
     tts.save(filename)
 
     with open(filename, "rb") as audio:
         await context.bot.send_voice(chat_id=chat_id, voice=InputFile(audio))
-
-    await context.bot.send_audio(chat_id=chat_id, audio=open("notify.mp3", "rb"))
 
     os.remove(filename)
 
@@ -62,8 +61,6 @@ def main():
         .token(TOKEN)
         .build()
     )
-
-    print("job Queue at startup:", app.job_queue)
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("remind", remind))
