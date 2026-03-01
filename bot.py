@@ -1,11 +1,11 @@
 print("🔥 NEW CODE VERSION 1.1 LOADED 🔥")
+
 from telegram import Update, InputFile
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from gtts import gTTS
 import os
-from datetime import datetime, timedelta
 
-TOKEN = "8735791546:AAF-GZ-vaFIIUVfp2OwbuQLyWoJA0ALBJYg"
+TOKEN = "YOUR_TOKEN_HERE"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -57,7 +57,11 @@ async def send_voice_reminder(context: ContextTypes.DEFAULT_TYPE):
     os.remove(filename)
 
 def main():
-    app = ApplicationBuilder().token(TOKEN).build()
+    app = (
+        ApplicationBuilder()
+        .token(TOKEN)
+        .build()
+    )
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("remind", remind))
@@ -68,3 +72,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+  
