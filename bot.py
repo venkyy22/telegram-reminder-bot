@@ -23,7 +23,7 @@ async def remind(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("Give me something to remind you about.")
             return
 
-        context.application.job_queue.run_once(...)(
+        context.application.job_queue.run_once(
             send_voice_reminder,
             when=minutes * 60,
             data={
