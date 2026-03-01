@@ -5,7 +5,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from gtts import gTTS
 import os
 
-TOKEN = "PASTE_YOUR_REAL_BOT_TOKEN_HERE"
+TOKEN = "8735791546:AAF-GZ-vaFIIUVfp2OwbuQLyWoJA0ALBJYg"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
