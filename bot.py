@@ -62,6 +62,8 @@ def main():
         .token(TOKEN)
         .build()
     )
+    job_queue = JobQueue()
+    job_queue.set_application(app)
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("remind", remind))
